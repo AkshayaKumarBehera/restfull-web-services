@@ -1,10 +1,10 @@
 package com.akki.rest.webservices.restfullwebservices.prices;
 
 public class PriceData {
-    private String product_id;
+    private int product_id;
     private Price price;
 
-    public PriceData(String product_id, Price price) {
+    public PriceData(int product_id, Price price) {
         this.product_id = product_id;
         this.price = price;
     }
@@ -13,11 +13,11 @@ public class PriceData {
 
     }
 
-    public String getProduct_id() {
+    public int getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(String product_id) {
+    public void setProduct_id(int product_id) {
         this.product_id = product_id;
     }
 
@@ -32,7 +32,7 @@ public class PriceData {
     @Override
     public String toString() {
         return "PriceData{" +
-                "product_id='" + product_id + '\'' +
+                "product_id=" + product_id +
                 ", price=" + price +
                 '}';
     }
