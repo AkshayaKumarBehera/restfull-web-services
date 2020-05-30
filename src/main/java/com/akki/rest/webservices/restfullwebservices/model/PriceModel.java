@@ -1,14 +1,14 @@
-package com.akki.rest.webservices.restfullwebservices.prices;
+package com.akki.rest.webservices.restfullwebservices.model;
 
-public class Price {
+public class PriceModel {
     private String range;
     private Double minPrice;
     private  Double maxPrice;
 
-    protected Price(){
+    public PriceModel(){
 
     };
-    public Price(String range, Double minPrice, Double maxPrice) {
+    public PriceModel(String range, Double minPrice, Double maxPrice) {
         this.range = range;
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
