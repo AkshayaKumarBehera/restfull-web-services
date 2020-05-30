@@ -1,9 +1,14 @@
 package com.akki.rest.webservices.restfullwebservices.services;
 
-import com.akki.rest.webservices.restfullwebservices.model.PriceDataModel;
+import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
+
+import java.util.Collection;
 
 public interface PriceService {
-    public PriceDataModel findPriceByProductId(int productId);
-    public PriceDataModel save(PriceDataModel priceDataModel);
-    public PriceDataModel deleteByProdId(int productId);
+    public PriceModel createProductPrice(PriceModel priceModel);
+    public Collection<PriceModel> getAllPrices();
+    public void updatePrice(Integer productId, PriceModel updatedPriceModel);
+    public PriceModel deletePriceByProdId(Integer productId);
+    public PriceModel findPriceByProductId(Integer productId);
+
 }

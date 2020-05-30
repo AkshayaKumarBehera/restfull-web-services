@@ -7,14 +7,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class PriceServiceImplTest {
 
     @Test
+    void getAllPrices() {
+    }
+
+    @Test
+    void createProductPrice() {
+    }
+
+    @Test
+    void updatePrice() {
+    }
+
+    @Test
+    void deletePriceByProdId() {
+    }
+
+    @Test
     void findPriceByProductId() {
-    }
-
-    @Test
-    void save() {
-    }
-
-    @Test
-    void deleteByProdId() {
     }
 }

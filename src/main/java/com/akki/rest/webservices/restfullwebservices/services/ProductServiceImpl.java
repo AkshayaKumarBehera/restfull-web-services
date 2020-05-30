@@ -20,9 +20,9 @@ public class ProductServiceImpl implements ProductService{
 	private PriceServiceImpl priceService;
 
 	static {
-		productModels.add(new ProductModel(100, "Prod1", "Seller1","manufacturer1",new PriceModel("2-3",new Double(2.00),new Double(3.00))));
-		productModels.add(new ProductModel(200, "Prod2", "Seller2","manufacturer2",new PriceModel("3-4",new Double(3.00),new Double(4.00))));
-		productModels.add(new ProductModel(300, "Prod3", "Seller3","manufacturer3", new PriceModel("4-5",new Double(4.00),new Double(5.00))));
+		productModels.add(new ProductModel(100, "Prod1", "Seller1","manufacturer1",new PriceModel(100,"2-3",new Double(2.00),new Double(3.00))));
+		productModels.add(new ProductModel(200, "Prod2", "Seller2","manufacturer2",new PriceModel(200,"3-4",new Double(3.00),new Double(4.00))));
+		productModels.add(new ProductModel(300, "Prod3", "Seller3","manufacturer3", new PriceModel(300,"4-5",new Double(4.00),new Double(5.00))));
 	}
 
 	public List<ProductModel> findAll() {

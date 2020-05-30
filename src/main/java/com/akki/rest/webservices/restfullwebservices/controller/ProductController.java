@@ -5,7 +5,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import com.akki.rest.webservices.restfullwebservices.services.PriceServiceImpl;
 import com.akki.rest.webservices.restfullwebservices.services.ProductServiceImpl;
 import com.akki.rest.webservices.restfullwebservices.exception.ProductNotFoundException;
-import com.akki.rest.webservices.restfullwebservices.model.PriceDataModel;
 import com.akki.rest.webservices.restfullwebservices.model.ProductModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,16 +74,5 @@ public class ProductController {
 		model.add(linkTo.withRel("all-products"));
 
 		return model;
-	}
-
-	@GetMapping("/price/{id}")
-	public PriceDataModel getProductPrice(@PathVariable int id){
-		logger.info("getProductPrice Method entry to retrieve price of certain product");
-		PriceDataModel priceData = priceServiceImpl.findPriceByProductId(id);
-
-		if(priceData==null)
-			throw new ProductNotFoundException("id-"+ id);
-
-		return priceData;
 	}
 }

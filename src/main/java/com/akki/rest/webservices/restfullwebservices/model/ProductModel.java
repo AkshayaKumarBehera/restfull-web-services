@@ -1,9 +1,10 @@
 
 package com.akki.rest.webservices.restfullwebservices.model;
 
-import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
-
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class ProductModel {
 
@@ -23,9 +24,17 @@ public class ProductModel {
 	private PriceModel priceModel;
 
 
-	public ProductModel(@Size(min=3, message="Product Id should have at least 3 digit") Integer product_id, @Size(min = 2, message = "Name should have atleast 2 characters") String title, String seller_Id, String manufacturer, PriceModel priceModel) {
+	public ProductModel(Integer product_id, String title, String seller_Id, String manufacturer, PriceModel priceModel) {
 		super();
 		this.product_id = product_id;
+		this.title = title;
+		this.seller_Id = seller_Id;
+		this.manufacturer = manufacturer;
+		this.priceModel = priceModel;
+	}
+
+	public ProductModel(String title, String seller_Id, String manufacturer, PriceModel priceModel) {
+		super();
 		this.title = title;
 		this.seller_Id = seller_Id;
 		this.manufacturer = manufacturer;

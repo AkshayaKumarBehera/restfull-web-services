@@ -1,8 +1,10 @@
 package com.akki.rest.webservices.restfullwebservices.controller;
 
-import com.akki.rest.webservices.restfullwebservices.services.PriceServiceImpl;
-import com.akki.rest.webservices.restfullwebservices.model.PriceDataModel;
+import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
+import com.akki.rest.webservices.restfullwebservices.services.PriceService;
 import com.akki.rest.webservices.restfullwebservices.exception.ProductNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,35 +14,48 @@ import javax.validation.Valid;
 
 @RestController
 public class PriceController {
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+
     @Autowired
-    PriceServiceImpl priceServiceImpl;
+    PriceService priceService;
 
-    @GetMapping("/price/product/{id}")
-    public PriceDataModel getPrice(@PathVariable int id){
-        PriceDataModel priceData = priceServiceImpl.findPriceByProductId(id);
-
-        if(priceData==null)
-            throw new ProductNotFoundException("id-"+ id);
-
-        return priceData;
+    @PostMapping("/products/prices")
+    public ResponseEntity<Object> createProductPrice(@Valid @RequestBody PriceModel priceModel){
+        logger.info("Entry of createProductPrice method inside Price Controller");
+        PriceModel newPrice = priceService.createProductPrice(priceModel);
+        return new ResponseEntity<>("Price is created successfully", HttpStatus.CREATED);
     }
 
-    @PostMapping("/price")
-    public ResponseEntity<Object> createPrice(@Valid @RequestBody PriceDataModel priceDataModel){
-        PriceDataModel savedPriceDataModel = priceServiceImpl.save(priceDataModel);
-        /*URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedPriceDataModel.getProduct_id()).toUri();
-        return ResponseEntity.created(location).build();*/
-        return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
+    @GetMapping("/products/prices")
+    public  ResponseEntity<Object> getAllPrices(){
+        logger.info("Entry of GetAllPrices method inside Price Controller");
+        return new ResponseEntity<>(priceService.getAllPrices(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/price/product/{id}")
-    public ResponseEntity<Object> deletePrice(@PathVariable int id){
-        PriceDataModel priceDataModel = priceServiceImpl.deleteByProdId(id);
-        if(priceDataModel == null)
+    @PutMapping("/products/price/{id}")
+    public ResponseEntity<Object> updatePrice(@PathVariable Integer id, @RequestBody PriceModel updatedPrice){
+        logger.info("Inside update price method");
+        priceService.updatePrice(id, updatedPrice);
+
+        return new ResponseEntity<>("Price is updated successfully", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/products/price/{id}")
+    public ResponseEntity<Object> deletePrice(@PathVariable Integer id){
+        logger.info("Entry of deletePrice method inside Price Controller");
+        PriceModel priceModel = priceService.deletePriceByProdId(id);
+        if(priceModel == null)
             throw new ProductNotFoundException("Product Id:"+id);
         return new ResponseEntity<>("Price is deleted successfully", HttpStatus.OK);
+    }
+
+    @GetMapping("/products/price/{id}")
+    public PriceModel getPriceByProductId(@PathVariable Integer id){
+        logger.info("Entry of getPriceByProductId method inside Price Controller");
+        PriceModel priceData = priceService.findPriceByProductId(id);
+        if(priceData==null)
+            throw new ProductNotFoundException("Product does not exit -- Product Id:"+ id);
+
+        return priceData;
     }
 }

@@ -1,9 +1,6 @@
 package com.akki.rest.webservices.restfullwebservices.services;
 
-import com.akki.rest.webservices.restfullwebservices.model.PriceDataModel;
 import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
-import com.akki.rest.webservices.restfullwebservices.services.PriceServiceImpl;
-import com.akki.rest.webservices.restfullwebservices.services.ProductServiceImpl;
 import com.akki.rest.webservices.restfullwebservices.model.ProductModel;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,20 +28,18 @@ public class ProductServiceImplTest {
 
     @Test
     public void testFindAllProducts() {
-        PriceDataModel pp = new PriceDataModel();
-        pp.setProduct_id(100);
         PriceModel priceModel = new PriceModel();
         priceModel.setMaxPrice(5.0);
         priceModel.setMinPrice(3.0);
         priceModel.setRange("4-5");
-        pp.setPriceModel(priceModel);
-        Mockito.when(priceServiceImplMock.findPriceByProductId(100)).thenReturn(pp);
-        Assert.assertEquals(pp, priceServiceImplMock.findPriceByProductId(100));
+
+        Mockito.when(priceServiceImplMock.findPriceByProductId(100)).thenReturn(priceModel);
+        Assert.assertEquals(priceModel, priceServiceImplMock.findPriceByProductId(100));
 
         List<ProductModel> productList = new ArrayList<>();
-        productList.add(new ProductModel(100, "Prod1", "Seller1","manufacturer1",new PriceModel("2-3",new Double(2.00),new Double(3.00))));
-        productList.add(new ProductModel(200, "Prod2", "Seller2","manufacturer2",new PriceModel("3-4",new Double(3.00),new Double(4.00))));
-        productList.add(new ProductModel(300, "Prod3", "Seller3","manufacturer3", new PriceModel("4-5",new Double(4.00),new Double(5.00))));
+        productList.add(new ProductModel(100, "Prod1", "Seller1","manufacturer1",new PriceModel(100,"2-3",new Double(2.00),new Double(3.00))));
+        productList.add(new ProductModel(200, "Prod2", "Seller2","manufacturer2",new PriceModel(200,"3-4",new Double(3.00),new Double(4.00))));
+        productList.add(new ProductModel(300, "Prod3", "Seller3","manufacturer3", new PriceModel(300,"4-5",new Double(4.00),new Double(5.00))));
         //Mockito.when(productServiceImplMock.findAll()).thenReturn(productList);
         //Assert.assertEquals(productList, productServiceImplMock.findAll());
 
