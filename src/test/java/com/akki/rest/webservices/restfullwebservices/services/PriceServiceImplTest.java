@@ -2,7 +2,8 @@ package com.akki.rest.webservices.restfullwebservices.services;
 
 import com.akki.rest.webservices.restfullwebservices.dao.PriceDaoImpl;
 import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RunWith(MockitoJUnitRunner.class)
-class PriceServiceImplTest {
-
+public class PriceServiceImplTest {
     @Mock
     PriceDaoImpl priceDaoImplMock;
 
@@ -22,8 +22,7 @@ class PriceServiceImplTest {
     PriceServiceImpl priceServiceImplMock;
 
     @Test
-    void getAllPrices() {
-
+    public void getAllPrices(){
         Map<Integer, PriceModel> priceModels = new HashMap<Integer, PriceModel>();
 
         PriceModel priceModel1 = new PriceModel();
@@ -48,35 +47,17 @@ class PriceServiceImplTest {
         priceModels.put(priceModel3.getProduct_id(),priceModel3);
 
         Mockito.when(priceDaoImplMock.getProductsPrices()).thenReturn(priceModels.values());
-
-
+        Assert.assertEquals(priceModels.values(), priceServiceImplMock.getAllPrices());
     }
 
     @Test
-    void createProductPrice() {
-    }
-
-    @Test
-    void updatePrice() {
-    }
-
-    @Test
-    void deletePriceByProdId() {
-    }
-
-    /*@BeforeEach
-    public void setup(){
-    ReflectionTestUtils.setField(priceServiceImplMock,"priceDaoImplMock",priceDaoImplMock);
-    }*/
-
-    @Test
-    void findPriceByProductId() {
+    public void findPriceByProductId(){
         PriceModel priceModel = new PriceModel();
         priceModel.setMaxPrice(5.0);
         priceModel.setMinPrice(4.0);
         priceModel.setRange("4-5");
 
         Mockito.when(priceDaoImplMock.findPriceByProductId(100)).thenReturn(priceModel);
-        //Assert.assertEquals(priceModel, priceServiceImplMock.findPriceByProductId(100));
+        Assert.assertEquals(priceModel, priceServiceImplMock.findPriceByProductId(100));
     }
 }
