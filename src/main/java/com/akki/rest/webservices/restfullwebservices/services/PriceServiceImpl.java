@@ -31,10 +31,12 @@ public class PriceServiceImpl implements PriceService{
 	}
 
 	public PriceModel deletePriceByProdId(Integer productId) {
+
 		return priceDao.deletePriceByProductId(productId);
 	}
 
 	public PriceModel findPriceByProductId(Integer productId){
+
 		return priceDao.findPriceByProductId(productId);
 	}
 

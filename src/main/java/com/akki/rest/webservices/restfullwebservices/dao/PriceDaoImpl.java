@@ -64,9 +64,6 @@ public class PriceDaoImpl implements PriceDao{
             if(entry.getKey().equals(productId)){
                 return entry.getValue();
             }
-           /* else{
-                throw new ProductNotFoundException("This product does not exist -- Product Id:"+ productId);
-            }*/
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package com.akki.rest.webservices.restfullwebservices.services;
 
+import com.akki.rest.webservices.restfullwebservices.dao.ProductDaoImpl;
 import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
 import com.akki.rest.webservices.restfullwebservices.model.ProductModel;
 import org.junit.Assert;
@@ -9,41 +10,32 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceImplTest {
 
     @Mock
-    PriceServiceImpl priceServiceImplMock;
+    ProductDaoImpl productDaoImplMock;
 
     @InjectMocks
     ProductServiceImpl productServiceImplMock;
 
     @Test
     public void testFindAllProducts() {
-        PriceModel priceModel = new PriceModel();
-        priceModel.setMaxPrice(5.0);
-        priceModel.setMinPrice(3.0);
-        priceModel.setRange("4-5");
-
-        Mockito.when(priceServiceImplMock.findPriceByProductId(100)).thenReturn(priceModel);
-        Assert.assertEquals(priceModel, priceServiceImplMock.findPriceByProductId(100));
 
         List<ProductModel> productList = new ArrayList<>();
         productList.add(new ProductModel(100, "Prod1", "Seller1","manufacturer1",new PriceModel(100,"2-3",new Double(2.00),new Double(3.00))));
         productList.add(new ProductModel(200, "Prod2", "Seller2","manufacturer2",new PriceModel(200,"3-4",new Double(3.00),new Double(4.00))));
         productList.add(new ProductModel(300, "Prod3", "Seller3","manufacturer3", new PriceModel(300,"4-5",new Double(4.00),new Double(5.00))));
-        //Mockito.when(productServiceImplMock.findAll()).thenReturn(productList);
-        //Assert.assertEquals(productList, productServiceImplMock.findAll());
+        Mockito.when(productDaoImplMock.findAll()).thenReturn(productList);
+        Assert.assertEquals(productList, productServiceImplMock.findAll());
 
-        Assert.assertEquals(3, productServiceImplMock.findAll().toArray().length);
+        Assert.assertEquals(3, productDaoImplMock.findAll().toArray().length);
         List<ProductModel>  productModels = productServiceImplMock.findAll();
         assertThat(productModels.size()).isEqualTo(3);
 
@@ -57,8 +49,7 @@ public class ProductServiceImplTest {
     }
     @Test
     public void testCreateProduct(){
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
  }
 
 }
