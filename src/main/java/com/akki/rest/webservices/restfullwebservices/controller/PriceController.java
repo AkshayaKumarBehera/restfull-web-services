@@ -50,12 +50,12 @@ public class PriceController {
     }
 
     @GetMapping("/products/price/{id}")
-    public PriceModel getPriceByProductId(@PathVariable Integer id){
+    public ResponseEntity<Object> getPriceByProductId(@PathVariable Integer id){
         logger.info("Entry of getPriceByProductId method inside Price Controller");
         PriceModel priceData = priceService.findPriceByProductId(id);
         if(priceData==null)
             throw new ProductNotFoundException("Product does not exit -- Product Id:"+ id);
 
-        return priceData;
+        return new ResponseEntity<>(priceData, HttpStatus.OK);
     }
 }

@@ -26,8 +26,8 @@ public class PriceServiceImpl implements PriceService{
 		return  newPriceData;
 	}
 
-	public void updatePrice(Integer productId, PriceModel updatedPriceModel){
-		priceDao.updateProductPrice(productId, updatedPriceModel);
+	public PriceModel updatePrice(Integer productId, PriceModel updatedPriceModel){
+		return priceDao.updateProductPrice(productId, updatedPriceModel);
 	}
 
 	public PriceModel deletePriceByProdId(Integer productId) {

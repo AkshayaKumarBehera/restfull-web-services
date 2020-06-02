@@ -19,7 +19,7 @@ public class ProductControllerTest extends AbstractTest {
     }
 
     @Test
-    public void getProductsList() throws Exception {
+    public void getProductsListTest() throws Exception {
         String uri = "/products";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
@@ -27,12 +27,12 @@ public class ProductControllerTest extends AbstractTest {
         int status = mvcResult.getResponse().getStatus();
         Assertions.assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
-        ProductModel[] productlist = super.mapFromJson(content, ProductModel[].class);
-        Assertions.assertTrue(productlist.length > 0);
+        ProductModel[] products = super.mapFromJson(content, ProductModel[].class);
+        Assertions.assertTrue(products.length > 0);
     }
 
     @Test
-    public void createProduct() throws Exception{
+    public void createProductTest() throws Exception{
         String uri = "/products";
 
         ProductModel productModel1 = new ProductModel();
@@ -58,7 +58,7 @@ public class ProductControllerTest extends AbstractTest {
     }
 
     @Test
-    public void deleteProduct() throws Exception {
+    public void deleteProductTest() throws Exception {
         String uri = "/products/100";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
         int status = mvcResult.getResponse().getStatus();
@@ -68,10 +68,10 @@ public class ProductControllerTest extends AbstractTest {
     }
 
     @Test
-    public void updateProduct() throws Exception {
+    public void updateProductTest() throws Exception {
         String uri = "/products/100";
         ProductModel product = new ProductModel();
-        product.setTitle("Prod11");
+        product.setProduct_id(100);
         String inputJson = super.mapToJson(product);
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -81,5 +81,18 @@ public class ProductControllerTest extends AbstractTest {
         Assertions.assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
         Assertions.assertEquals(content, "Product is updated successfully");
+    }
+
+    @Test
+    public void getProductByProductId() throws Exception{
+        /*String uri = "/products/100";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        Assertions.assertEquals(200, status);
+        String content = mvcResult.getResponse().getContentAsString();
+        ProductModel product = super.mapFromJson(content, ProductModel.class);
+        Assertions.assertEquals(100, product.getProduct_id());*/
     }
 }

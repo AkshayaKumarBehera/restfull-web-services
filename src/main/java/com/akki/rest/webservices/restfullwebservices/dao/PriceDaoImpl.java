@@ -47,10 +47,11 @@ public class PriceDaoImpl implements PriceDao{
     }
 
     @Override
-    public void updateProductPrice(Integer productId, PriceModel updatedPriceModel) {
+    public PriceModel updateProductPrice(Integer productId, PriceModel updatedPriceModel) {
         priceModels.remove(productId);
         updatedPriceModel.setProduct_id(productId);
         priceModels.put(productId, updatedPriceModel);
+        return updatedPriceModel;
     }
 
     @Override

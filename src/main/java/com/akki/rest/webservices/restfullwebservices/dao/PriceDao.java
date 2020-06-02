@@ -7,7 +7,7 @@ import java.util.Collection;
 public interface PriceDao {
     public PriceModel createProductPrice(PriceModel priceModel);
     public Collection<PriceModel> getProductsPrices();
-    public void updateProductPrice(Integer productId, PriceModel updatedPriceModel);
+    public PriceModel updateProductPrice(Integer productId, PriceModel updatedPriceModel);
     public PriceModel deletePriceByProductId(Integer productId);
     public PriceModel findPriceByProductId(Integer productId);
 }

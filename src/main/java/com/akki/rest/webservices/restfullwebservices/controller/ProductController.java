@@ -62,7 +62,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/products/{id}")
-	public EntityModel<ProductModel> retrieveProduct(@PathVariable int id) {
+	public ResponseEntity<Object> retrieveProduct(@PathVariable int id) {
 		logger.info("retrieveProduct Method entry to retrieve certain product");
 		ProductModel productModel = service.findOne(id);
 
@@ -73,6 +73,6 @@ public class ProductController {
 		WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllProducts());
 		model.add(linkTo.withRel("all-products"));
 
-		return model;
+		return new ResponseEntity<>(model, HttpStatus.OK);
 	}
 }

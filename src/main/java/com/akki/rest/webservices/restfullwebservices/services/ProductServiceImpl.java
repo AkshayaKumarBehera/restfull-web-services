@@ -21,15 +21,15 @@ public class ProductServiceImpl implements ProductService{
 		return productDoa.save(productModel);
 	}
 
-	public ProductModel findOne(int id) {
-		return productDoa.findOne(id);
+	public ProductModel updateProduct(int id, ProductModel productModel) {
+		return productDoa.updateProduct(id, productModel);
 	}
 
 	public ProductModel deleteById(int id) {
 		return productDoa.deleteById(id);
 	}
 
-	public ProductModel updateProduct(int id, ProductModel productModel) {
-		return productDoa.updateProduct(id, productModel);
+	public ProductModel findOne(int id) {
+		return productDoa.findOne(id);
 	}
 }
