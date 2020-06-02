@@ -2,18 +2,18 @@ package com.akki.rest.webservices.restfullwebservices.services;
 
 import com.akki.rest.webservices.restfullwebservices.dao.PriceDaoImpl;
 import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class PriceServiceImplTest {
     @Mock
     PriceDaoImpl priceDaoImplMock;
@@ -47,7 +47,7 @@ public class PriceServiceImplTest {
         priceModels.put(priceModel3.getProduct_id(),priceModel3);
 
         Mockito.when(priceDaoImplMock.getProductsPrices()).thenReturn(priceModels.values());
-        Assert.assertEquals(priceModels.values(), priceServiceImplMock.getAllPrices());
+        Assertions.assertEquals(priceModels.values(), priceServiceImplMock.getAllPrices());
     }
 
     @Test
@@ -57,7 +57,8 @@ public class PriceServiceImplTest {
         priceModel.setMinPrice(4.0);
         priceModel.setRange("4-5");
 
+
         Mockito.when(priceDaoImplMock.findPriceByProductId(100)).thenReturn(priceModel);
-        Assert.assertEquals(priceModel, priceServiceImplMock.findPriceByProductId(100));
+        Assertions.assertEquals(priceModel, priceServiceImplMock.findPriceByProductId(100));
     }
 }

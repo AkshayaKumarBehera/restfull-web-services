@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+//@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = RestfullWebServicesApplication.class)
 @WebAppConfiguration
 public abstract class AbstractTest {

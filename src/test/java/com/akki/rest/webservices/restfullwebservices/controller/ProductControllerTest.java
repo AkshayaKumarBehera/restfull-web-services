@@ -1,20 +1,19 @@
 package com.akki.rest.webservices.restfullwebservices.controller;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
 import com.akki.rest.webservices.restfullwebservices.model.ProductModel;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+
 public class ProductControllerTest extends AbstractTest {
 
     @Override
-    @Before
+    @BeforeEach
     public void setUp() {
         super.setUp();
     }
@@ -26,10 +25,10 @@ public class ProductControllerTest extends AbstractTest {
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
         int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
+        Assertions.assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
         ProductModel[] productlist = super.mapFromJson(content, ProductModel[].class);
-        assertTrue(productlist.length > 0);
+        Assertions.assertTrue(productlist.length > 0);
     }
 
     @Test
@@ -53,9 +52,9 @@ public class ProductControllerTest extends AbstractTest {
                 .content(inputJson)).andReturn();
 
         int status = mvcResult.getResponse().getStatus();
-        assertEquals(201, status);
+        Assertions.assertEquals(201, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(content, "Product is created successfully");
+        Assertions.assertEquals(content, "Product is created successfully");
     }
 
     @Test
@@ -63,9 +62,9 @@ public class ProductControllerTest extends AbstractTest {
         String uri = "/products/100";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
         int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
+        Assertions.assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(content, "Product is deleted successfully");
+        Assertions.assertEquals(content, "Product is deleted successfully");
     }
 
     @Test
@@ -79,8 +78,8 @@ public class ProductControllerTest extends AbstractTest {
                 .content(inputJson)).andReturn();
 
         int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
+        Assertions.assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(content, "Product is updated successfully");
+        Assertions.assertEquals(content, "Product is updated successfully");
     }
 }

@@ -3,21 +3,23 @@ package com.akki.rest.webservices.restfullwebservices.services;
 import com.akki.rest.webservices.restfullwebservices.dao.ProductDaoImpl;
 import com.akki.rest.webservices.restfullwebservices.model.PriceModel;
 import com.akki.rest.webservices.restfullwebservices.model.ProductModel;
-import org.junit.Assert;
-import org.junit.Test;
-//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ProductServiceImplTest {
 
     @Mock
@@ -34,9 +36,9 @@ public class ProductServiceImplTest {
         productList.add(new ProductModel(200, "Prod2", "Seller2","manufacturer2",new PriceModel(200,"3-4",new Double(3.00),new Double(4.00))));
         productList.add(new ProductModel(300, "Prod3", "Seller3","manufacturer3", new PriceModel(300,"4-5",new Double(4.00),new Double(5.00))));
         Mockito.when(productDaoImplMock.findAll()).thenReturn(productList);
-        Assert.assertEquals(productList, productServiceImplMock.findAll());
+        Assertions.assertEquals(productList, productServiceImplMock.findAll());
 
-        Assert.assertEquals(3, productDaoImplMock.findAll().toArray().length);
+        Assertions.assertEquals(3, productDaoImplMock.findAll().toArray().length);
         List<ProductModel>  productModels = productServiceImplMock.findAll();
         assertThat(productModels.size()).isEqualTo(3);
 
